@@ -1,0 +1,60 @@
+hostname: http://localhost
+server:
+  port: 8081
+
+spring:
+  application:
+    name: service-a
+  output:
+    ansi:
+      enabled: ALWAYS
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+        prefer-ip-address: true
+
+# fault tolerance configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+    instances:
+      serviceBCall:
+        base-config: default
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    org.zalando.logbook: TRACE
+    io.github.resilience4j: DEBUG
+logbook:
+  filter:
+    enabled: true
+  format:
+    style: http # Log as HTTP messages
+  include:
+    - /api/v1/**
+    - request-uri
+    - request-headers
+    - request-body
+    - response-headers
+    - response-body
+  exclude:
+    - headers.authorization # Optionally exclude sensitive information
+  obfuscate:
+    headers:
+      - Authorization
+    parameters:
+      - password
