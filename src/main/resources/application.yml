@@ -1,6 +1,6 @@
 hostname: http://localhost
-server:
-  port: 8081
+#server:
+#  port: 7070
 
 spring:
   application:
@@ -8,13 +8,13 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        register: true
-        prefer-ip-address: true
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        register: false
+#        prefer-ip-address: true
 
 # fault tolerance configuration
 resilience4j:
@@ -28,6 +28,14 @@ resilience4j:
     instances:
       serviceBCall:
         base-config: default
+  ratelimiter:
+    metrics:
+      enabled: true
+    instances:
+      globalRateLimiter:             #spacify this name in ratelimiter name otherwise it will not work
+        limitForPeriod: 5            # 5 calls per period
+        limitRefreshPeriod: 1s       # Refresh rate every 1 second
+        timeoutDuration: 500ms       # Timeout after 500ms if permission cannot be acquired
 
 
 management:

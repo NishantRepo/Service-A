@@ -34,11 +34,21 @@
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-undertow</artifactId>
     </dependency>
+<!--    <dependency>-->
+<!--        <groupId>org.springframework.cloud</groupId>-->
+<!--        <artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
+<!--    </dependency>-->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-actuator</artifactId>
@@ -49,8 +59,8 @@
     </dependency>
     <dependency>
         <groupId>io.github.resilience4j</groupId>
-        <artifactId>resilience4j-spring-boot2</artifactId>
-        <version>2.0.2</version> <!-- Use the latest version -->
+        <artifactId>resilience4j-spring-boot3</artifactId>
+<!--        <version>2.0.2</version> &lt;!&ndash; Use the latest version &ndash;&gt;-->
     </dependency>
     <dependency>
         <groupId>org.zalando</groupId>
