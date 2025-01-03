@@ -8,6 +8,8 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  config:
+    import: optional:git:https://github.com/NishantRepo/config-server.git
 #  cloud:
 #    consul:
 #      host: localhost
@@ -33,6 +35,10 @@ resilience4j:
       enabled: true
     instances:
       globalRateLimiter:             #spacify this name in ratelimiter name otherwise it will not work
+        limitForPeriod: 5            # 5 calls per period
+        limitRefreshPeriod: 1s       # Refresh rate every 1 second
+        timeoutDuration: 500ms       # Timeout after 500ms if permission cannot be acquired
+      myRateLimiter: #spacify this name in ratelimiter name otherwise it will not work
         limitForPeriod: 5            # 5 calls per period
         limitRefreshPeriod: 1s       # Refresh rate every 1 second
         timeoutDuration: 500ms       # Timeout after 500ms if permission cannot be acquired

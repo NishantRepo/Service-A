@@ -1,7 +1,6 @@
 package org.example.filter;
 
 import io.github.resilience4j.ratelimiter.RateLimiter;
-import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,9 +17,8 @@ public class GlobalRateLimiterFilter extends OncePerRequestFilter {
     private final RateLimiter rateLimiter;
 
     // Constructor: Inject the RateLimiter registry and configure a global RateLimiter
-    public GlobalRateLimiterFilter(RateLimiterRegistry rateLimiterRegistry) {
-        // Configure global rate limiter
-        this.rateLimiter = rateLimiterRegistry.rateLimiter("globalRateLimiter");
+    public GlobalRateLimiterFilter(RateLimiter rateLimiter) {
+        this.rateLimiter = rateLimiter;
     }
 
     @Override

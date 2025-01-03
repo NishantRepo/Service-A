@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RateLimiterController {
 
     @GetMapping("/rateLimiter")
-    @RateLimiter(name = "myRateLimiter", fallbackMethod = "rateLimiterFallback")
+        @RateLimiter(name = "myRateLimiter", fallbackMethod = "rateLimiterFallback")
     public String getAllRecords() {
 
        return "response: success";
