@@ -22,7 +22,8 @@ public class TestsDeom {
         Map<String, List<Employee>> map = list.stream().collect(Collectors.groupingBy(data -> data.getDept()));
         System.out.println(map);
 
-        Map<String, Double> fdfd = list.stream().collect(Collectors.groupingBy(data -> data.getDept(), Collectors.averagingInt(data -> data.getSal())));
+        Map<String, Double> fdfd = list.stream()
+                .collect(Collectors.groupingBy(data -> data.getDept(), Collectors.averagingInt(data -> data.getSal())));
         System.out.println("avarage");
         System.out.println(fdfd);
     }
